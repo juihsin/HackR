@@ -1,0 +1,15 @@
+
+static int sockMerchant(int n, int[] ar) {
+    Set<Integer> tmpSet = new HashSet<Integer>();
+    int matchedPairCount = 0;
+    for (int i = 0; i < n; i++) {
+        int sockNow = ar[i];
+        if (tmpSet.contains(sockNow)) {
+            tmpSet.remove(sockNow);
+            matchedPairCount += 1;
+        } else {
+            tmpSet.add(sockNow);
+        }
+    }
+    return matchedPairCount;
+}
