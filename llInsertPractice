@@ -1,0 +1,20 @@
+### Should add this!
+class Node(object):
+    def __init__(self, data=None, next_node=None):
+        self.data = data
+        self.next = next_node
+
+def insertNodeAtPosition(head, data, position):
+    newNode = Node(data)
+    
+    print(f"If insert at head")
+    if position == 0:
+        return Node(data, head)
+    
+    print(f"If not insert at head")
+    currentNode = head
+    for index in range(position-1):
+        currentNode = currentNode.next
+    newNode = Node(data, currentNode.next)
+    currentNode.next = newNode
+    return head
