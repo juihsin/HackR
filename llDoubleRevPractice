@@ -1,0 +1,19 @@
+def reverse(head):
+    if head == None or head.next == None:
+        return head
+
+    prevNode = head
+    currNode = head.next
+    while currNode.next != None:
+        prevNode, currNode = currNode, currNode.next
+    
+    head = currNode
+    while prevNode != None:
+        print(f"prevNode.data: {prevNode.data}, currNode.data: {currNode.data}")
+        currNode.prev = currNode.next
+        currNode.next = prevNode
+        prevNode.next = prevNode.prev
+        prevNode.prev = currNode
+        prevNode, currNode = prevNode.next, prevNode
+
+    return head
