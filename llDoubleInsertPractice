@@ -1,0 +1,29 @@
+### Should add this!
+class Node(object):
+    def __init__(self, data=None, next_node=None, prev_node=None):
+        self.data = data
+        self.next = next_node
+        self.prev = prev_node
+        
+def sortedInsert(head, data):
+    newNode = Node(data=data)
+    
+    if data < head.data:
+        print(f"If insert at the first node.")
+        head.prev = newNode
+        newNode.next = head
+        newNode.prev = None
+        return newNode
+    
+    print(f"If insert not at the first node.")
+    prev_ll_now = head
+    while prev_ll_now.data <= data and prev_ll_now.next != None and prev_ll_now.next.data <= data:
+        prev_ll_now = prev_ll_now.next
+    next_ll = prev_ll_now.next ### 1. prev_ll_now 2. newNode 3. next_ll
+    
+    newNode.prev = prev_ll_now # [1-1] Set prev_ll_now <- newNode
+    prev_ll_now.next = newNode # [1-2] Set prev_ll_now -> newNode
+    if next_ll != None:
+        newNode.next = next_ll # [2-1] Set newNode -> next_ll
+        next_ll.prev = newNode # [2-2] Set newNode <- next_ll
+    return head
