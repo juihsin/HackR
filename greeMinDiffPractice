@@ -1,4 +1,5 @@
 def minimumAbsoluteDifference(arr):
+    ### 先排序, 找最小距離
     arr.sort()
     diffs = list()
     for i in range(1, len(arr)):
