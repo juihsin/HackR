@@ -1,0 +1,10 @@
+def has_cycle(head):
+    check_map = list()
+    check_map.append(head)
+    next_node = head.next
+    while next_node is not None:
+        if next_node in check_map:
+            return 1
+        else:
+            check_map.append(next_node)
+            return 0
