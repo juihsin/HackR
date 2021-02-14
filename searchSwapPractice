@@ -1,0 +1,57 @@
+import sys
+
+class Node:    
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+        self.depth = 1
+        
+    def setLeft(self, left):
+        self.left = left
+        
+    def setRight(self, right):
+        self.right = right
+        
+    def setDepth(self, depth):
+        self.depth = depth
+        
+    def getDepth(self):
+        return self.depth
+    
+    def swapNode(self):      
+        self.left, self.right = self.right, self.left
+        
+def Solution(root):
+    if root.left is None and root.right is None : 
+        return f"{root.val}"
+    else:
+        if root.left is None : 
+            return f"{root.val} {Solution(root.right)}"
+        elif root.right is None : 
+            return f"{Solution(root.left)} {root.val}"
+        else : 
+            return f"{Solution(root.left)} {root.val} {Solution(root.right)}"
+        
+sys.setrecursionlimit(1050)
+n = int(input())
+nodes = []
+nodes.append(Node(1))
+
+for i in range(n):
+    temp = [int(x) for x in input().split(' ')]
+    for j in range(2):
+        if temp[j] is not -1: 
+            tempNode = Node(temp[j])
+            tempNode.setDepth(nodes[i].getDepth()+1)
+            nodes.append(tempNode)
+            if j is 0 : nodes[i].setLeft(tempNode)
+            else: nodes[i].setRight(tempNode)
+
+k = int(input())
+for i in range(k):
+    a = int(input())
+    for x in nodes:
+        if x.getDepth() % a is 0 : x.swapNode()
+    answer = Solution(nodes[0])
+    print(answer)
