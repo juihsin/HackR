@@ -1,0 +1,12 @@
+def getMinimumCost(k, c):
+    c.sort()
+    perPerson, curRound, totalAmount = 0, 0, 0
+    for i in range(len(c)-1, -1, -1): # from last to first
+        totalAmount += c[i] * (perPerson+1)
+        print(f"i: {i}; totalAmount: {totalAmount} += {c[i]} * {(perPerson+1)}")
+        curRound += 1
+        if curRound == k:
+            print(f"[curRound == k] curRound: {curRound}; perPerson: {perPerson}")
+            curRound = 0
+            perPerson += 1
+    return totalAmount
