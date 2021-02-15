@@ -1,0 +1,12 @@
+def twoStrings(s1, s2):
+    compare_result = "NO"
+    s1_char_count_map = Counter([char for char in s1])
+    s2_char_count_map = Counter([char for char in s2])
+    base_map = s2_char_count_map if len(s1_char_count_map.keys()) > len(s2_char_count_map.keys()) else s1_char_count_map
+    compare_map = s1_char_count_map if len(s1_char_count_map.keys()) > len(s2_char_count_map.keys()) else s2_char_count_map
+    print(f"base_map: {base_map}; compare_map: {compare_map}")
+    
+    for word in base_map.keys():
+        if word in compare_map.keys():
+            compare_result = "YES"
+    return compare_result
