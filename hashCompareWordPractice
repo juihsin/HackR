@@ -1,0 +1,12 @@
+def checkMagazine(magazine, note):
+    check_result = "Yes"
+    magazine_map = Counter(list(magazine))
+    note_map = Counter(list(note))
+    # print(f"magazine_map: {magazine_map}; note_map: {note_map}")
+    for note_word in note_map.keys(): 
+        if note_word not in magazine_map.keys(): 
+            check_result = "No"
+        else: 
+            if note_map[note_word] > magazine_map[note_word]:
+                check_result = "No"
+    print(f"{check_result}")
