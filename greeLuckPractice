@@ -1,0 +1,19 @@
+def luckBalance(k, contests):
+    print(f"k: {k}; contests: {contests}")
+    important_map = {}
+    important_map[0] = list()
+    important_map[1] = list()
+    for i in range(len(contests)):
+        luck_score = contests[i][0]
+        important_degree = contests[i][1]
+        important_map[important_degree].append(luck_score)
+    important_luck_scores = list(important_map[1])
+    important_luck_scores.sort()
+    print(f"important_luck_scores: {important_luck_scores}; 1: {len(important_luck_scores)}")
+    
+    important_luck_num = len(important_luck_scores) - k if k < len(important_luck_scores) else 0
+    add_important_luck_scores = sum(important_luck_scores[important_luck_num:])
+    subtract_important_luck_scores = sum(important_luck_scores[:important_luck_num])
+    result = sum(important_map[0]) + add_important_luck_scores - subtract_important_luck_scores
+    print(f"result: {result} = {sum(important_map[0])} + {add_important_luck_scores} - {subtract_important_luck_scores}")
+    return result
