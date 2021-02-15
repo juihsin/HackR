@@ -1,0 +1,16 @@
+def sherlockAndAnagrams(s):
+    sub_word_count_dict = dict()
+    n = len(s)
+    for i in range(n):
+        for j in range(i, n):
+            cur = s[i: j+1]
+            cur = ''.join(sorted(cur))
+            # print(f"i: {i}; j: {j}; cur: {cur}")
+            sub_word_count_dict[cur] = sub_word_count_dict.get(cur, 0) + 1
+            
+    print(f"sub_word_count_dict: {sub_word_count_dict}")
+    ans = 0
+    for x in sub_word_count_dict:
+        v = sub_word_count_dict[x]
+        ans += (v * (v - 1)) // 2
+    return ans
