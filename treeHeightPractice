@@ -10,3 +10,20 @@ def height(root):
     else:
         return rightHeight
     return root
+
+
+
+
+
+########################################################################
+def height(root):
+    leftH = 0
+    rightH = 0
+    if (root.left != None):
+        leftH = height(root.left) + 1
+    if (root.right != None):
+        rightH = height(root.right) + 1
+    if leftH > rightH:
+        return leftH
+    else:
+        return rightH
