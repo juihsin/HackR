@@ -27,3 +27,31 @@ def sortedInsert(head, data):
         newNode.next = next_ll # [2-1] Set newNode -> next_ll
         next_ll.prev = newNode # [2-2] Set newNode <- next_ll
     return head
+
+
+
+
+########################################################################################
+def sortedInsert(head, data):
+    newNode = Node(data=data)
+    
+    ### If insert head
+    if data < head.data:
+        head.prev = data
+        newNode.next = head
+        newNode.prev = None
+        return newNode
+    
+    ### If not insert head
+    current_node = head
+    while data > current_node.data and current_node.next != None and current_node.next.data <= data:
+        current_node = current_node.next
+    prev_tmp_node = current_node
+    next_tmp_node = current_node.next
+    
+    newNode.prev = prev_tmp_node # [1-1] Set prev_ll_now <- newNode
+    prev_tmp_node.next = newNode # [1-2] Set prev_ll_now -> newNode
+    if next_tmp_node != None:
+        newNode.next = next_tmp_node # [2-1] Set newNode -> next_ll
+        next_tmp_node.prev = newNode # [2-2] Set newNode <- next_ll
+    return head
