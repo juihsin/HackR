@@ -1,18 +1,56 @@
 def abbreviation(a, b):
+    ### 取位置的map ==> bpos: {'A': {0}, 'B': {1}, 'C': {2}}
     bpos = {}
     for i in range(len(b)):
         bpos[b[i]] = (bpos[b[i]] | set([i])) if b[i] in bpos else set([i])
         
     possibilities = set([0])
     for i in range(len(a)):
+    
+        ### 在b中找到對應的a (b位置和posibility取交集(and))), b位置往前進一格; 沒找到則b位置不動
         if a[i].upper() in bpos:
             intersection = bpos[a[i].upper()] & possibilities
             advancement = set([i + 1 for i in intersection])
         else:
             advancement = set([])
         
+        ### a完全對得上b (=== a是大寫的), b可能已經找到的位置就align advancement, 往前進一格; 
+        ### 如果對不上 (=== a不是大寫的), b可能已經找到的位置就取聯集(or), 可能下一個b位置就會對上也說不定
         if a[i].upper() == a[i]: # capitals must follow the intersection
             possibilities = advancement
         else:
             possibilities = possibilities | advancement
     return ("YES" if (len(b)) in possibilities else "NO")
+
+
+
+
+
+########################################## [DEBUG] ##########################################
+def abbreviation(a, b):
+    bpos = {}
+    for i in range(len(b)):
+        bpos[b[i]] = (bpos[b[i]] | set([i])) if b[i] in bpos else set([i])
+    print(f"bpos: {bpos}")
+        
+    b_possibilities = set([0])
+    for i in range(len(a)):
+        upper_a_item = a[i].upper()
+        ### 在b中找到對應的a (b位置和posibility取交集(and))), b位置往前進一格; 沒找到則b位置不動
+        if upper_a_item in bpos:
+            intersection = bpos[upper_a_item] & b_possibilities
+            advancement = set([i + 1 for i in intersection])
+            print(f"[if upper_a_item in bpos] intersection: {intersection} = {bpos[upper_a_item]} & {b_possibilities}; advancement: {advancement}")
+        else:
+            advancement = set([])
+            print(f"[if upper_a_item not in bpos:] b_possibilities: {b_possibilities}; advancement: {advancement}")
+        
+        ### a完全對得上b (=== a是大寫的), b可能已經找到的位置就align advancement, 往前進一格; 
+        ### 如果對不上 (=== a不是大寫的), b可能已經找到的位置就取聯集(or), 可能下一個b位置就會對上也說不定
+        if upper_a_item == a[i]: 
+            b_possibilities = advancement
+            print(f"upper_a_item == a[i], a[i]: {a[i]} ==> {b_possibilities} b_possibilities = advancement")
+        else:
+            b_possibilities = b_possibilities | advancement
+            print(f"upper_a_item != a[i], a[i]: {a[i]} ==> {b_possibilities} b_possibilities = b_possibilities | advancement")
+    return ("YES" if (len(b)) in b_possibilities else "NO")
