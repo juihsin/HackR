@@ -1,0 +1,9 @@
+def makeAnagram(a, b):
+    deletNum = 0
+    string_set = set(a + b)
+    for i in range(len(string_set)):
+        count = a.count(list(string_set)[i])
+        count2 = b.count(list(string_set)[i])
+        main_count = abs(count - count2)
+        deletNum += main_count
+    return deletNum
