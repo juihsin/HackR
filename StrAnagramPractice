@@ -7,3 +7,15 @@ def makeAnagram(a, b):
         main_count = abs(count - count2)
         deletNum += main_count
     return deletNum
+
+
+def alternatingCharacters(s):
+    deletNum = 0
+    prevC, i = None, 0
+    for c in s:
+        if i != 0:
+            if prevC == c:
+                deletNum += 1
+        prevC = c
+        i += 1
+    return deletNum
