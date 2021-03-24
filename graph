@@ -1,0 +1,41 @@
+https://www.hackerrank.com/challenges/torque-and-development/copy-from/204539177
+
+def journeyToMoon(n, astronaut):
+    # get same country list
+    # dfs > count group
+    
+    adj = [[] for i in range(n)]
+    for ap in astronaut:
+        a, b = ap
+        adj[a].append(b)
+        adj[b].append(a)
+    print(adj)
+    
+    nodes = list(range(n))
+    visited = set()
+    nodeC = 0
+    reuslt = 0
+    for start in nodes:
+        if start not in visited:
+            road_nodes, visited = dfs(start, adj, visited)
+            reuslt += nodeC * len(road_nodes)
+            nodeC += len(road_nodes)
+            print(f"road_nodes, nodeC, reuslt: {road_nodes, nodeC, reuslt}")
+            # https://www.youtube.com/watch?v=dP1Auzs1yJo
+    return reuslt
+
+def dfs(start, adj, visited):
+    path = [start]
+    visited.add(start)
+    road_nodes = [start]
+    while path:
+        node_now = path[-1]
+        if not adj[node_now]: # 沒相鄰
+            path.pop()
+        else: # 有相鄰
+            next_node = adj[node_now].pop()
+            if next_node not in visited:
+                path.append(next_node)
+                road_nodes.append(next_node)
+                visited.add(next_node)
+    return road_nodes, visited
